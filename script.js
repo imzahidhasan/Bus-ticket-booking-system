@@ -1,8 +1,9 @@
 getElementById("banner-btn").addEventListener("click", goToTicketSection);
+
 function getElementById(elemId) {
-  const element = document.getElementById(elemId);
-  return element;
+  return document.getElementById(elemId);
 }
+
 function goToTicketSection() {
   getElementById("TicketCenter").scrollIntoView({
     behavior: "smooth",
@@ -17,18 +18,22 @@ let totalPrice = 0;
 let totalSeat = 40;
 let totalSeatLeft = getElementById("totalSeatLeft");
 totalSeatLeft.innerText = totalSeat;
-let seatArr = [];
 
+function updatePrices() {
+  let showTotalPrice = getElementById("totalPrice");
+  let grandTotal = getElementById("grandTotalPrice");
+  showTotalPrice.innerText = totalPrice;
+  grandTotal.innerText = totalPrice;
+}
 for (const seat of seats) {
   seat.addEventListener("click", function () {
     if (totalSelectedSeat === 4) {
       return alert(
-        "You have already selected 4 Seat,you cannot book more than 4"
+        "You have already selected 4 seats; you cannot book more than 4."
       );
     }
-    seat.classList.add(["bg-[#1DD100]"]);
-    seatArr.push(seat.innerText);
-
+    seat.classList.add("disabled:bg-[#1DD100]");
+    seat.setAttribute("disabled", true);
     let seatNumber = seat.innerText;
     let TicketListArea = getElementById("TicketListArea");
     let h1 = document.createElement("h1");
@@ -42,10 +47,7 @@ for (const seat of seats) {
     TicketListArea.appendChild(h3);
     totalSelectedSeat = totalSelectedSeat + 1;
     totalPrice = totalPrice + 550;
-    let showTotalPrice = getElementById("totalPrice");
-    let selectedSeatNumber = getElementById("selectedSeat");
-    selectedSeatNumber.innerText = totalSelectedSeat;
-    showTotalPrice.innerText = totalPrice;
+    updatePrices();
     totalSeatLeft.innerText = totalSeat - totalSelectedSeat;
   });
 }
@@ -58,6 +60,7 @@ const couponBtn = getElementById("couponBtn");
 couponBtn.addEventListener("click", function () {
   let voucher = getElementById("inputValue").value;
   const grandTotal = getElementById("grandTotalPrice");
+
   if (voucher === coupon1 && totalSelectedSeat === 4) {
     getElementById("discountLine").classList.remove("hidden");
     let h1 = document.createElement("h1");
