@@ -92,7 +92,8 @@ couponBtn.addEventListener("click", function () {
 const PhoneNumberInput= getElementById("PhoneNumberInput")
   
 PhoneNumberInput.addEventListener('keyup', function () {
-  if (PhoneNumberInput.value.length>11) {
+  if (PhoneNumberInput.value.length > 11) {
+    getElementById("nextBtn").classList.add("btn-disabled");
     alert('Your Phone Number length should be 11 digit')
   }else if(PhoneNumberInput.value.length<11) {
      getElementById("nextBtn").classList.add("btn-disabled");
