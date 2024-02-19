@@ -76,11 +76,45 @@ couponBtn.addEventListener("click", function () {
     grandTotal.innerText = grandTotalPrice;
     getElementById("inputField").classList.add("hidden");
   } else if (voucher === coupon2 && totalSelectedSeat === 4) {
+      getElementById("discountLine").classList.remove("hidden");
+    let h1 = document.createElement("h1");
+    h1.innerText = totalPrice * 0.15;
     let grandTotalPrice = totalPrice - totalPrice * 0.2;
+    getElementById("discount").appendChild(h1);
     grandTotal.innerText = grandTotalPrice;
     getElementById("inputField").classList.add("hidden");
   } else {
     grandTotal.innerText = totalPrice;
+    alert('Invalid Coupon! Please Enter a Valid Coupon Code')
   }
 });
 
+const PhoneNumberInput= getElementById("PhoneNumberInput")
+  
+PhoneNumberInput.addEventListener('keyup', function () {
+  if (PhoneNumberInput.value.length>11) {
+    alert('Your Phone Number length should be 11 digit')
+  }else if(PhoneNumberInput.value.length<11) {
+     getElementById("nextBtn").classList.add("btn-disabled");
+  }
+  else if ((PhoneNumberInput.value.length ===11 && totalSelectedSeat >= 1)) {
+    getElementById("nextBtn").classList.remove('btn-disabled')
+  }
+})
+
+getElementById("nextBtn").addEventListener("click", function () {
+   
+   if (PhoneNumberInput.value.length === 0) {
+     alert("Please enter your phone number");
+  }
+  PhoneNumberInput.value = "";
+  getElementById("nextBtn").classList.add("btn-disabled");
+  getElementById("modalInfo").classList.remove('hidden')
+  getElementById("mainSection").classList.add('hidden')
+  
+ });
+getElementById("continueBtn").addEventListener('click', function () {
+  getElementById("mainSection").classList.remove('hidden')
+  
+  
+})
