@@ -48,7 +48,13 @@ for (const seat of seats) {
     totalSelectedSeat = totalSelectedSeat + 1;
     totalPrice = totalPrice + 550;
     updatePrices();
+    getElementById("selectedSeat").innerText=totalSelectedSeat;
     totalSeatLeft.innerText = totalSeat - totalSelectedSeat;
+    if(totalSelectedSeat===4) {
+    getElementById("couponBtn").classList.remove("btn-disabled");
+    }
+      
+    
   });
 }
 
@@ -77,3 +83,4 @@ couponBtn.addEventListener("click", function () {
     grandTotal.innerText = totalPrice;
   }
 });
+
